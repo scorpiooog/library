@@ -1,0 +1,26 @@
+
+/* reset */
+html{overflow:hidden;}
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,abbr,article,aside,command,details,figcaption,figure,footer,header,hgroup,mark,meter,nav,output,progress,section,summary,time { margin: 0; padding: 0; }
+*{ -webkit-box-sizing: border-box;  box-sizing: border-box;}
+fieldset,iframe { border: none; }
+caption,th { text-align: left; }
+table { border-collapse: collapse; border-spacing: 0; border: medium none;}
+tbody{display: table-row-group;
+vertical-align: middle;
+border-color: inherit;}
+td,th{
+	display: table-cell;
+	vertical-align: inherit;
+}
+article,aside,footer,header,hgroup,nav,section,figure,figcaption { display: block; }
+input, button, select, textarea {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+/* reset end*/
+
+html,body{
+	font-size:1rem;
+}
