@@ -1,0 +1,6 @@
+.btn{
+	outline:none;
+	font-size:1rem;
+	display:inline-block;
+	padding:.40625rem $gap;
+}

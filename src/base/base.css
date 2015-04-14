@@ -1,3 +1,9 @@
+/* base colors */
+$c_text:#3b424b;
+$c_primary:#337ab7;
+
+$bg_gray:#f6f8fa;
+
 
 /* reset */
 html{overflow:hidden;}
@@ -23,4 +29,12 @@ line-height: inherit;
 
 html,body{
 	font-size:1rem;
+	border:0;
+	color:$c_text;
+	background-color:$bg_gray;
+}
+a{
+	&:hover{
+		color:$c_primary;
+	}
 }
