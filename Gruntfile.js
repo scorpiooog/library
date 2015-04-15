@@ -1,9 +1,9 @@
 //fixed
 //Q1:cwd什么意思    A:相对于src的询问路径(一言以蔽之：在cwd下找src的内容)
 //Q2:怎么写后缀名   A:ext属性指定后缀名，extDot属性(first,last)指定从哪个'.'开始修改后缀
+//Q3:为什么不能copy  A:task里没有target
 
 //todo
-//Q3:为什么不能copy
 
 module.exports = function(grunt){
 
@@ -80,34 +80,31 @@ module.exports = function(grunt){
         	}
         },
         copy:{
-            files:[
-                {
-                    expand:true,
-                    cwd:'src/',
-                    src:['**/*'],
-                    dist:'dist/'
-                }
-            ]
+            dist:{
+                expand:true,
+                cwd:'src/',
+                src:['**/*.js'],
+                dist:'dist/'
+            }
         },
         watch:{
             scripts:{
-                files:{'src/**/*.js':'dist/'}
-                // tasks:['newer:copy']
-                // tasks:['copy']
+                files:['src/**/*.js'],
+                tasks:['newer:copy:def']
             }
-            // css:{
-            //     files:'src/**/*.{css,scss,sass}',
-            //     tasks:['newer:sass']
-            // },
-            // images:{
-            //     files:[{
-            //         expand:true,
-            //         cwd:'src/',
-            //         src:'**/*.{png,jpg,gif}',
-            //         dist:'dist/'
-            //     }],
-            //     tasks:['newer:copy']
-            // }
+            css:{
+                files:'src/**/*.{css,scss,sass}',
+                tasks:['newer:sass']
+            },
+            images:{
+                files:[{
+                    expand:true,
+                    cwd:'src/',
+                    src:'**/*.{png,jpg,gif}',
+                    dist:'dist/'
+                }],
+                tasks:['newer:copy']
+            }
         }
     });
 
