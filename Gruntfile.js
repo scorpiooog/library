@@ -44,32 +44,20 @@ module.exports = function(grunt){
         		]
         	}
         },
-        uglify:{//压缩
+        uglify:{//压缩js
         	options:{
         		banner:'/*! <%= config.app %> <%= grunt.template.today() %> */\n'
         	},
-        	dist:{
-        		files:[
-	        		{
-	        			expand: true,     // Enable dynamic expansion.
-						cwd: 'dist/',	//Q1
-						src: ['<%= config.app %>.js'], // Actual pattern(s) to match.
-						dest:'dist/<%= config.app %>',
-						ext:['.min.js','.min.css'], //Q2
-                        extDot:'last'
-	        		}
-
-	        		//another way
-	        		// 'dist/<%= config.app %>.min.js' : ['<%= concat.dist.dest %>'],
-	        		// 'dist/**/*.min.css' : ['src/**/*.css']
-        		]
-
-        		// another way
-        		// src:[<%= concat.dist.dest %>],
-        		// dest:'dist/<%= config.app %>.min.js'
-        	}
+            files:{
+                expand: true,     // Enable dynamic expansion.
+                cwd: 'dist/',   //Q1
+                src: ['<%= config.app %>.js'], // Actual pattern(s) to match.
+                dest:'dist/<%= config.app %>',
+                ext:'.min.js', //Q2
+                extDot:'last'
+            }
         },
-        concat:{//拼接、合并
+        concat:{//拼接、合并js
         	options:{
         		separator:';'
         	},
@@ -79,30 +67,44 @@ module.exports = function(grunt){
         		dest:'dist/<%= config.app %>.js'
         	}
         },
+        cssmin:{//压缩css
+            main:{
+                expand:true,
+                cwd:'dist/',
+                src:['**/*.css'],
+                dest:'dist/',
+                ext:'.min.css'
+            }
+        },
+        jshint:{
+            main:{
+                src:'src/**/*.js'
+            }
+        },
         copy:{
             dist:{
                 expand:true,
                 cwd:'src/',
                 src:['**/*.js'],
-                dist:'dist/'
+                dest:'dist/'
             }
         },
         watch:{
             scripts:{
                 files:['src/**/*.js'],
-                tasks:['newer:copy:def']
-            }
+                tasks:['newer:copy']
+            },
             css:{
                 files:'src/**/*.{css,scss,sass}',
-                tasks:['newer:sass']
+                tasks:['newer:sass','newer:cssmin']
             },
             images:{
-                files:[{
+                files:{
                     expand:true,
                     cwd:'src/',
                     src:'**/*.{png,jpg,gif}',
                     dist:'dist/'
-                }],
+                },
                 tasks:['newer:copy']
             }
         }
@@ -119,7 +121,7 @@ module.exports = function(grunt){
 	grunt.registerTask('default', ['watch']);
 
     // grunt.registerTask('default',function (target) {
-    //     //target: task name        
+    //     //target: task name
     //     grunt.task.run(['clean','concurrent:develop']);
 
     // });
