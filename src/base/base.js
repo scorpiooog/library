@@ -1,65 +1,7 @@
 
-'use strict';
-
 ;(function ($,undefined) {
-	$.extend({
-		modal:function(para){
-			para =$.extend({
-				title:'',
-				message:'',
-				footers:[
-					{
-						name:'确定',
-						className:'btn btn-primary',
-						clickFun:function(){$.modalHide()}
-					}
-				]
-			}, para);
-
-			var tmbtn,$f;
-
-			if(!$(document.body).data('hasmodal')){
-				$(document.body).data('hasmodal',true);
-				var container = ['<div class="modal">',
-								'<div class="modal-dialog"><div class="modal-content">',
-									'<div class="modal-header">',
-										(para.title?'<h3>'+para.title+'</h3>':''),
-										'<i class="icon-close-primary close"></i></div>',
-									'<div class="modal-body">'+para.message+'</div>',
-									'<div class="modal-footer"></div></div></div></div>'].join('');
-				$(document.body).append(container);
-				$('.modal .icon-close-primary').on('click',function(){
-					$.modalHide();
-				});
-			}
-			$('.modal').css({'display':'block','padding-right':'17px'});
-			$('.modal-header span').html(para.title);
-			$('.modal-body').html(para.message);
-
-			$f = $('.modal-footer');
-			$f.html('');
-			for (var i = 0,length = para.footers.length; i < length; i++) {
-				tmbtn = para.footers[i];
-				$('<button class="btn">'+tmbtn.name+'</button>').addClass(tmbtn.className).on('click',tmbtn.clickFun).appendTo($f);
-			};
-
-			var backdrop = '<div class="modal-backdrop"></div>';
-			$(document.body).addClass('modal-open').append(backdrop);
-		},
-		modalHide:function(){
-			$(document.body).removeClass('modal-open');
-			$('.modal').fadeOut(300);
-			$('.modal-backdrop').fadeOut(300,function(){
-				$('.modal-backdrop').remove();
-			});
-		},
-		getFile:function(url,para){
-			para = (para ? jsonToUrl(para) : false) || '';
-			var formcontent = '<iframe style="display:none;" src="'+url+'?'+para+'"></iframe>';
-			$(formcontent).appendTo('body');
-		}
-	});
-
+	'use strict';
+	
 	$.fn.extend({
 		/*
 			$select.alterOptions({key:value, key:value, ...., key:value }, {
@@ -497,4 +439,18 @@ function accDiv(arg1,arg2){
         r2 = Number(arg2.toString().replace(".",""));
         return (r1 / r2) * pow(10, t2 - t1);
     }
+}
+
+/*
+	json -> k=v&k1=v1&...
+*/
+function jsonToUrl (json) {
+	var urlStr = '';
+	if(json){
+		for(var key in json){
+			urlStr = urlStr + '&' + key + '=' + json[key];
+		}
+		urlStr = urlStr.substr(1);
+	}
+	return urlStr;
 }
