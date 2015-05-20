@@ -71,6 +71,12 @@ html *.hidden {
   margin: 0 7%;
   padding: 0 1.25rem; }
 
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px; }
+
 .row {
   margin: 0 -1.25rem 1.25rem; }
 

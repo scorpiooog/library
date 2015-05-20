@@ -1,7 +1,7 @@
 //fixed
 //Q1:cwd什么意思    A:相对于src的询问路径(一言以蔽之：在cwd下找src的内容)
 //Q2:怎么写后缀名   A:ext属性指定后缀名，extDot属性(first,last)指定从哪个'.'开始修改后缀
-//Q3:为什么不能copy  A:task里没有target
+//Q3:为什么不能copy  A:task里没有target 
 
 //todo
 
